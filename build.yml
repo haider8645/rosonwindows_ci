@@ -1,7 +1,4 @@
 parameters:
-- name: ros_metapackage  # Deprecated
-  type: string
-  default: 'ros-humble-desktop'
 - name: rosdistro
   type: string
   default: 'humble'
@@ -17,12 +14,6 @@ parameters:
 - name: custom_test_timeout
   type: number
   default: 15
-- name: pre_build  # Hook to run immediately before catkin_make.
-  type: stepList
-  default: []
-- name: build_chocolatey_pkg  # Only supported for Windows build.
-  type: boolean
-  default: false
 - name: platforms
   type: object
   default:
@@ -47,7 +38,7 @@ jobs:
         targetFolder: '$(Build.StagingDirectory)/src/_'
 
     - script: |
-        source /opt/ros/$CI_ROSDISTRO/setup.sh
+        source /opt/ros/$CI_ROSDISTRO/setup.bash
         sudo apt update
         rosdep update
         rosdep install --from-paths src --ignore-src -r -y
