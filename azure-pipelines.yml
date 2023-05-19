@@ -1,0 +1,16 @@
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: haider8645/rosonwindows_ci
+      endpoint: haider8645
+
+jobs:
+- template: build.yml@templates  # Template reference
+  parameters:
+    rosdistro: melodic
+    metapackage: desktop
+    custom_version: '20200501.1.0'  # Optional; default is `latest`.
+    custom_test_target: 'run_tests'  # Optional; default is `run_tests`.
+    platforms:
+      - linux
